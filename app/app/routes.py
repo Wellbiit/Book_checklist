@@ -21,8 +21,8 @@ def add_book_to_database(book_data):
     book_data["time"] = convert_time_to_object(book_data["time"])
     book_data["date"] = convert_date_to_object(book_data["date"])
     book_data["user"] = 1
-    event = Book(**book_data)
-    add_new_item(event)
+    book = Book(**book_data)
+    add_new_item(book)
 
 
 def create_response(status_code):
@@ -31,8 +31,8 @@ def create_response(status_code):
     return response
 
 
-@app.route("/create_event", methods=["POST"])
-def create_book_check():
+@app.route("/create_book", methods=["POST"])
+def create_book():
     data_from_request = request.get_json()
     print(data_from_request)
     try:
@@ -47,8 +47,8 @@ def create_book_check():
     return response
 
 
-@app.route("/get_book_by_date/<date>")
-#TODO add jwt_required
+@app.route("/get_books_by_date/<date>")
+# TODO add jwt_required
 def get_books_by_date(date):
     print(date)
     date = datetime.fromisoformat(date)

@@ -30,7 +30,7 @@ class Book(Base, UserMixin):
     date = Column("date", Date)
     time = Column("time", Time, nullable=True)
     name = Column("name", String(80))
-    description_score = Column("description", String(240), nullable=True)
+    description_score = Column("description_score", String(240), nullable=True)
     user = Column("user", Integer, ForeignKey("users.id"))
 
     def __init__(self, date, time, name, description_score, user):
@@ -41,6 +41,7 @@ class Book(Base, UserMixin):
         self.description_score = description_score
         self.user = user
 
-# Base.metadata.create_all(engine)
-# print("Done!")
+
+Base.metadata.create_all(engine)
+print("Done!")
 

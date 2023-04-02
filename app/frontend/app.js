@@ -1,4 +1,4 @@
-window.onload = (event) => {
+window.onload = (book) => {
 
     const routes = [
         {path: '/', handler: homeHandler},
@@ -26,7 +26,7 @@ window.onload = (event) => {
         console.log("home works");
         const bookForm = document.getElementById("book-form");
         console.log(bookForm);
-        const urlAddBook = 'http://127.0.0.1:5000/add_book';
+        const urlAddBook = 'http://127.0.0.1:5000/create_book';
 
         renderBooksForFiveDays ()
 
@@ -106,19 +106,19 @@ window.onload = (event) => {
 
     function logout() {
         const btn = document.getElementById("logoutButton");
-        btn.addBookListener("click", (event) => {
+        btn.addBookListener("click", (book) => {
             localStorage.removeItem("token");
             location.replace("login.html")
         })}
 
 
-        function showEvents (data) {
+        function showBooks (data) {
             console.log(data)
 
             const booksDiv = document.getElementById("display-books");
 
             const singleDayBook = createElementAndAppendChild("div", null, booksDiv);
-            singleDayBook.classList.add("single-book-events");
+            singleDayBook.classList.add("single-day-book");
 
             const date = JSON.parse(data[0]).date;
             console.log(date)
@@ -128,15 +128,15 @@ window.onload = (event) => {
             }
 
             data.forEach( (book) => {
-                book = JSON.parse(event);
+                book = JSON.parse(book);
 
                 const singleBook = createElementAndAppendChild("div", null, singleDayBook);
 
-                createElementAndAppendChild("h3", event.header, singleBook);
+                createElementAndAppendChild("h3", book.header, singleBook);
 
-                createElementAndAppendChild("span", event.time, singleBook);
+                createElementAndAppendChild("span", book.time, singleBook);
 
-                createElementAndAppendChild("span", event.description, singleBook);
+                createElementAndAppendChild("span", book.description, singleBook);
             })
         }
 

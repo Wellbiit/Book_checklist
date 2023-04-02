@@ -26,11 +26,11 @@ def check_if_user_exist(nickname: str):
 
 
 def get_book_by(date):
-    events = session.query(Book).filter(Book.date == date, Book.user == 1).all()
-    jsonified_events = []
-    for event in events:
-        jsonified_events.append(create_json_from(event))
-    return jsonified_events
+    books = session.query(Book).filter(Book.date == date, Book.user == 1).all()
+    jsonified_books = []
+    for book in books:
+        jsonified_books.append(create_json_from(book))
+    return jsonified_books
 
 
 def delete_user(nickname):
